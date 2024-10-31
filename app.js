@@ -30,10 +30,12 @@ const YOUTUBE_REGEX =
 bot.hears(YOUTUBE_REGEX, youtube);
 
 bot.on(message("text"), (ctx) => {
-  let url = ytdl.validateURL(ctx?.message.text);
-  if (url) {
+  let url = ctx.message.text;
+  if (ytdl.validateURL(url)) {
     return youtube(ctx);
-  } else ctx.reply("bunday buyruq yoq iltimos qaytadan urinib ko`ring");
+  } else {
+    ctx.reply("Invalid YouTube link. Please try again with a valid video URL.");
+  }
 });
 
 bot.launch();
